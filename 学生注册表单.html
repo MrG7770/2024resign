@@ -50,6 +50,7 @@
 				if (rnameRegExp.test(rname)) {
 				} else {
 					alert("必须输入2-6个汉字！");
+					return false;
 				}
 			}
 			function checkPhoneNum(){
@@ -58,6 +59,7 @@
 				if(PNumRegExp.test(PNum)){
 				}else{
 					alert("必须输入11位手机号！");
+					return false;
 				}
 			}
 			function checkEmail(){
@@ -66,6 +68,7 @@
 				if(EmailRegExp.test(Email)){
 				}else{
 					alert("邮箱格式错误！");
+					return false;
 				}
 			}
 			function checkPassword(){
@@ -74,6 +77,7 @@
 				if(PasswordRegExp.test(Password)){
 				}else{
 					alert("密码输入错误，至少6位,包含字母和数字！");
+					return false;
 				}
 			}
 			function checkAPassword(){
@@ -81,7 +85,15 @@
 				const confirmPassword = document.getElementById("APassword").value;
 				if (password !== confirmPassword){
 				    alert("两次输入的密码不一致！");
+					return false;
 				}
+			}
+			function checksubmit(){
+				checkRealname();
+				checkPhoneNum();
+				checkEmail();
+				checkPassword();
+				checkAPassword();
 			}
 		</script>
 	</head>
@@ -109,7 +121,7 @@
 				<input   id="APassword"  class="form-control" onblur="checkAPassword()" type="password" placeholder="请再次输入密码"/>
 			</div>
 			<div>
-				<button type="submit" class="btn btn-register">注册</button>
+				<button type="submit" onblur="checksubmit()" class="btn btn-register">注册</button>
 			</div>
 		</form>
 	</body>
