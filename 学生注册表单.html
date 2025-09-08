@@ -48,8 +48,9 @@
 				rname=document.getElementById("realname").value;
 				rnameRegExp=/^[\u4e00-\u9fa5]{2,6}$/;
 				if (rnameRegExp.test(rname)) {
+					return true;
 				} else {
-					alert("必须输入2-6个汉字！");
+					alert("姓名必须输入2-6个汉字！");
 					return false;
 				}
 			}
@@ -57,6 +58,7 @@
 				PNum=document.getElementById("PhoneNum").value;
 				PNumRegExp=/^[0-9]{11}$/;
 				if(PNumRegExp.test(PNum)){
+					return true;
 				}else{
 					alert("必须输入11位手机号！");
 					return false;
@@ -66,6 +68,7 @@
 				Email=document.getElementById("Email").value;
 				EmailRegExp=/^[A-Za-z0-9_]+@[a-zA-Z0-9]+\.(com|cn|gov\.cn|org)$/;
 				if(EmailRegExp.test(Email)){
+					return true;
 				}else{
 					alert("邮箱格式错误！");
 					return false;
@@ -75,6 +78,7 @@
 				Password=document.getElementById("Password").value;
 				PasswordRegExp=/^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
 				if(PasswordRegExp.test(Password)){
+					return true;
 				}else{
 					alert("密码输入错误，至少6位,包含字母和数字！");
 					return false;
@@ -86,19 +90,21 @@
 				if (password !== confirmPassword){
 				    alert("两次输入的密码不一致！");
 					return false;
+				}else{
+					return true;
 				}
 			}
 			function checksubmit(){
-				checkRealname();
-				checkPhoneNum();
-				checkEmail();
-				checkPassword();
-				checkAPassword();
+				if(!checkRealname())  return false;
+				if(!checkPhoneNum())  return false;
+				if(!checkEmail())     return false;
+				if(!checkPassword())  return false;
+				if(!checkAPassword()) return false;
 			}
 		</script>
 	</head>
 	<body>
-		<form id="loginDiv">
+		<form onsubmit="return checksubmit()" id="loginDiv">
 			<h3 class="mt-3 mb-3">学生注册表单</h3>
 			<div class="mb-3 mt-3">
 				<label class="form-label">姓名</label><span id="xinghong">*</span>
@@ -121,7 +127,7 @@
 				<input   id="APassword"  class="form-control" onblur="checkAPassword()" type="password" placeholder="请再次输入密码"/>
 			</div>
 			<div>
-				<button type="submit" onblur="checksubmit()" class="btn btn-register">注册</button>
+				<button type="submit" class="btn btn-register">注册</button>
 			</div>
 		</form>
 	</body>
